@@ -1,2 +1,7 @@
-k3s_version: "v1.21.5+k3s1"
-k3s_token: "your-k3s-token"
+bootstrap_platform: github
+gh_owner:
+gh_repo:
+gh_branch:
+gh_path:
+private:
+kubeconfig_path: /etc/rancher/k3s/k3s.yaml

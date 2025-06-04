@@ -1,0 +1,21 @@
+
+- name: Check if K3s is installed
+  ansible.builtin.stat:
+    path: /usr/local/bin/flux
+  register: flux_bin
+
+- name: Install flux CLI (simplified)
+  ansible.builtin.shell: |
+    curl -s https://fluxcd.io/install.sh | sudo bash
+  when: not flux_bin.stat.exists
+
+
+- name: Bootstrap Flux to local cluster with generated manifests
+  ansible.builtin.shell: |
+    flux bootstrap k3s \
+      --namespace={{ flux_namespace }} \
+      --components=source-controller,kustomize-controller,helm-controller \
+      --token-auth \
+      --version={{ flux_version }}
+  register: flux_bootstrap
+  changed_when: "'already bootstrapped' not in flux_bootstrap.stdout"
