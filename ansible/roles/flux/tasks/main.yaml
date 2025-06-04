@@ -10,12 +10,14 @@
   when: not flux_bin.stat.exists
 
 
+
 - name: Bootstrap Flux to local cluster with generated manifests
-  ansible.builtin.shell: |
-    flux bootstrap k3s \
-      --namespace={{ flux_namespace }} \
-      --components=source-controller,kustomize-controller,helm-controller \
-      --token-auth \
-      --version={{ flux_version }}
   register: flux_bootstrap
-  changed_when: "'already bootstrapped' not in flux_bootstrap.stdout"
+  ansible.builtin.script: bootstrap_flux.sh
+  environment:
+    KUBECONFIG: /etc/rancher/k3s/k3s.yaml
+    GITHUB_TOKEN: "{{ lookup('env', 'GITHUB_TOKEN') }}"
+    GH_USERNAME: 
+    GH_REPOSITORY:
+    GH_BRANCH:
+    GH_PATH: 

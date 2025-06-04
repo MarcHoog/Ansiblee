@@ -1,7 +1,6 @@
-bootstrap_platform: github
-gh_owner:
-gh_repo:
-gh_branch:
-gh_path:
-private:
-kubeconfig_path: /etc/rancher/k3s/k3s.yaml
+gh_owner: "myorg"
+gh_repo: "myrepo"
+gh_branch: "main"
+is_private: "n"
+gh_path: "."
+gh_token: ""
