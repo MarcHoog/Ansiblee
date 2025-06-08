@@ -5,6 +5,17 @@
   roles:
     - k3s
 
+
+- name: Setup Flux Cluster on a singular controller
+  hosts: flux_controller
+  become: true
+  roles:
+    - flux:
+      github_owner: MarcHoog
+      github_repo: MyKubernetes
+      github_path: "myclusters/schiphol"
+
+
 #- name: Join agent nodes to the cluster
 #  hosts: agent
 #  become: true
